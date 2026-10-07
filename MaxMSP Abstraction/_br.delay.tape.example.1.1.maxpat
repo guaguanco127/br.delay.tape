@@ -15,7 +15,7 @@
             1480.0,
             630.0
         ],
-        "description": "_br.delay.tape.example.1.0 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
+        "description": "_br.delay.tape.example.1.1 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
         "boxes": [
             {
                 "box": {
@@ -1753,7 +1753,7 @@
                         463.0,
                         33.0
                     ],
-                    "text": "_br.delay.tape.example.1.0 -- Created by Brian Riordan, guaguanco127@gmail.com\nhttps://github.com/guaguanco127/"
+                    "text": "_br.delay.tape.example.1.1 -- Created by Brian Riordan, guaguanco127@gmail.com\nhttps://github.com/guaguanco127/"
                 }
             },
             {
@@ -1788,7 +1788,7 @@
                         560.0,
                         47.0
                     ],
-                    "text": "A stereo tape-style delay. Changing a time bends the pitch like tape instead of clicking. Three modes (Linked, Stereo, Ping-Pong), a feedback route (Straight or Cross), tone filters on the echoes, saturation on the repeats, drive into the tape, and wow and flutter. Every change glides: nothing clicks."
+                    "text": "A stereo tape-style delay. Changing a time bends the pitch like tape instead of clicking. Three modes (Linked, Stereo, Ping-Pong), a feedback route (Straight or Cross), tone filters on the echoes, saturation on the repeats, drive into the tape, wow and flutter, and On/Off. Every change glides: nothing clicks."
                 }
             },
             {
@@ -1806,7 +1806,7 @@
                         736.0,
                         60.0
                     ],
-                    "text": "Two files, same DSP inside:\nbr.delay.tape.1.0 = core, no UI (in: L, R, Mode, Time L, Time R, Glide, Feedback, Route, Low Cut, High Cut, Drive, Wow, Flutter, Dry/Wet)\nbr.delay.tape.ui.1.0 = the same with controls, for bpatchers\nUI and core have the same inlets and outlets in the same order."
+                    "text": "Two files, same DSP inside:\nbr.delay.tape.1.1 = core, no UI (in: L, R, Mode, Time L, Time R, Glide, Feedback, Route, Low Cut, High Cut, Drive, Wow, Flutter, Dry/Wet, On/Off)\nbr.delay.tape.ui.1.1 = the same with controls, for bpatchers\nUI and core have the same inlets and outlets in the same order."
                 }
             },
             {
@@ -1905,12 +1905,12 @@
                     "numinlets": 1,
                     "numoutlets": 0,
                     "patching_rect": [
-                        961.0,
+                        802.0,
                         134.0,
                         145.0,
                         20.0
                     ],
-                    "text": "A: br.delay.tape.ui.1.0"
+                    "text": "A: br.delay.tape.ui.1.1"
                 }
             },
             {
@@ -1924,7 +1924,7 @@
                     "lockeddragscroll": 0,
                     "lockedsize": 0,
                     "maxclass": "bpatcher",
-                    "name": "br.delay.tape.ui.1.0.maxpat",
+                    "name": "br.delay.tape.ui.1.1.maxpat",
                     "numinlets": 14,
                     "numoutlets": 2,
                     "offset": [
@@ -1938,7 +1938,7 @@
                     "patching_rect": [
                         802.0,
                         168.0,
-                        318.0,
+                        258.0,
                         146.0
                     ],
                     "viewvisibility": 1
@@ -2081,7 +2081,7 @@
                     "fontsize": 12.0,
                     "id": "obj-b",
                     "maxclass": "newobj",
-                    "numinlets": 14,
+                    "numinlets": 15,
                     "numoutlets": 2,
                     "outlettype": [
                         "signal",
@@ -2093,7 +2093,7 @@
                         420.0,
                         22.0
                     ],
-                    "text": "br.delay.tape.1.0"
+                    "text": "br.delay.tape.1.1"
                 }
             },
             {
@@ -2105,7 +2105,7 @@
                     "numinlets": 1,
                     "numoutlets": 0,
                     "patching_rect": [
-                        1415.0,
+                        1587.0,
                         275.0,
                         40.0,
                         20.0
@@ -2615,7 +2615,12 @@
                     ]
                 }
             },
-            "inherited_shortname": 1
+            "inherited_shortname": 1,
+            "obj-a::obj-onoff": [
+                "On/Off",
+                "On/Off",
+                0
+            ]
         },
         "autosave": 0
     }

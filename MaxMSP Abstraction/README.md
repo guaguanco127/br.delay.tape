@@ -1,11 +1,11 @@
-# Max/MSP Abstraction: br.delay.tape.1.0  
+# Max/MSP Abstraction: br.delay.tape.1.1  
    
 By Brian Riordan  
 [guaguanco127@gmail.com](mailto:guaguanco127@gmail.com)  
 [brianriordanmusic@gmail.com](mailto:brianriordanmusic@gmail.com)  
 [https://www.brianriordanmusic.com/](https://www.brianriordanmusic.com/) 
   
-Repository for br.delay.tape.1.0, with all related files, can be found here: [https://github.com/guaguanco127/br.delay.tape](https://github.com/guaguanco127/br.delay.tape)  
+Repository for br.delay.tape.1.1, with all related files, can be found here: [https://github.com/guaguanco127/br.delay.tape](https://github.com/guaguanco127/br.delay.tape)  
 Additional programs can be found here: [https://github.com/guaguanco127/br.max](https://github.com/guaguanco127/br.max)
 
 These files were created with Max 9.
@@ -20,7 +20,7 @@ These files were created with Max 9.
 
 ## <a name="About"></a>About
 
-A stereo tape-style delay. Changing the delay time moves the tape's read head instead of jumping, so the pitch bends while it travels, easing in and out like tape speeding up or slowing down. Three modes (Linked, Stereo, Ping-Pong), straight or cross feedback, tone filters on the echoes, saturation that holds runaway feedback, drive into the tape, and wow and flutter. Every change glides, mode switches included, so nothing clicks. Works at any sample rate.
+A stereo tape-style delay. Changing the delay time moves the tape's read head instead of jumping, so the pitch bends while it travels, easing in and out like tape speeding up or slowing down. Three modes (Linked, Stereo, Ping-Pong), straight or cross feedback, tone filters on the echoes, saturation that holds runaway feedback, drive into the tape, wow and flutter, and On/Off. Every change glides, mode switches included, so nothing clicks. Works at any sample rate.
 
 **Mode:**  
 **Linked:** both sides use Time L (Time R is ignored, and greyed out in the UI). Echoes at t, 2t, 3t...  
@@ -44,13 +44,15 @@ Switching modes moves the tape heads through the same glide as a time change: th
 
 **Dry/Wet:** 0 to 100 %, equal power. Default 50.  
 
+**On/Off:** Off fades the echoes out and brings the dry signal up to full level, whatever the Dry/Wet. The delay keeps running underneath, so turning it back on never plays old echoes from before it was turned off. Default on.  
+
 ## <a name="Files"></a>Which file?
 
 | File | What it is |
 |---|---|
-| br.delay.tape.1.0 | No UI. The plain object to patch with |
-| br.delay.tape.ui.1.0 | With Mode and Route menus and a dial for every control, ready for a [bpatcher] |
-| _br.delay.tape.example.1.0 | Example patch: open this first. Pick a source (drum loop, voice, synth plucks, a stereo pair or your mic) |
+| br.delay.tape.1.1 | No UI. The plain object to patch with |
+| br.delay.tape.ui.1.1 | With Mode and Route menus and a dial for every control and an On/Off button, ready for a [bpatcher] (258 x 146) |
+| _br.delay.tape.example.1.1 | Example patch: open this first. Pick a source (drum loop, voice, synth plucks, a stereo pair or your mic) |
 
 The UI version contains the plain version and has the same inlets and outlets, so either swaps in without rewiring. Open the UI version in patching mode for comments on how it is built.
 
@@ -64,9 +66,9 @@ By saving your logic in an abstraction, you can create modules that can be used 
 
 1. Make sure you have Max 9 installed, and that the Max patch you are using is saved inside a folder.  
 
-2. Copy the .maxpat files you want into the same folder as your patch. The UI version needs the plain version next to it (br.delay.tape.ui.1.0 uses br.delay.tape.1.0).
+2. Copy the .maxpat files you want into the same folder as your patch. The UI version needs the plain version next to it (br.delay.tape.ui.1.1 uses br.delay.tape.1.1).
 
-3. In your patch, create an object called br.delay.tape.1.0. For the version with controls, create a [bpatcher] and choose br.delay.tape.ui.1.0.maxpat as its patcher.
+3. In your patch, create an object called br.delay.tape.1.1. For the version with controls, create a [bpatcher] and choose br.delay.tape.ui.1.1.maxpat as its patcher.
 
 ## <a name="Use"></a>How To Use
 
@@ -86,6 +88,7 @@ By saving your logic in an abstraction, you can create modules that can be used 
 | 12 | Wow | Signal or Float (UI: Float only) | 0 to 1 | 0.2 |
 | 13 | Flutter | Signal or Float (UI: Float only) | 0 to 1 | 0.2 |
 | 14 | Dry/Wet | Signal or Float (UI: Float only) | % 0 to 100 | 50 |
+| 15 | On/Off | Signal or Int (UI: Int only) | 0 off, 1 on | 1 |
 
 Outlets 1 / 2: Left Out / Right Out (Signal)
 

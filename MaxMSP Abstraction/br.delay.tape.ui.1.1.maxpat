@@ -12,13 +12,13 @@
         "openrect": [
             85.0,
             104.0,
-            318.0,
+            258.0,
             146.0
         ],
         "openrectmode": 0,
         "openinpresentation": 1,
-        "devicewidth": 318.0,
-        "description": "br.delay.tape.ui.1.0 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
+        "devicewidth": 258.0,
+        "description": "br.delay.tape.ui.1.1 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
         "boxes": [
             {
                 "box": {
@@ -103,7 +103,7 @@
                     "presentation_rect": [
                         7.0,
                         7.0,
-                        144.0,
+                        94.0,
                         17.0
                     ],
                     "saved_attribute_attributes": {
@@ -170,7 +170,7 @@
                     "presentation": 1,
                     "presentation_rect": [
                         7.0,
-                        30.0,
+                        28.0,
                         44.0,
                         52.0
                     ],
@@ -236,7 +236,7 @@
                     "presentation": 1,
                     "presentation_rect": [
                         57.0,
-                        30.0,
+                        28.0,
                         44.0,
                         52.0
                     ],
@@ -302,7 +302,7 @@
                     "presentation": 1,
                     "presentation_rect": [
                         107.0,
-                        30.0,
+                        28.0,
                         44.0,
                         52.0
                     ],
@@ -367,8 +367,8 @@
                     ],
                     "presentation": 1,
                     "presentation_rect": [
-                        167.0,
-                        30.0,
+                        157.0,
+                        28.0,
                         44.0,
                         52.0
                     ],
@@ -433,9 +433,9 @@
                     ],
                     "presentation": 1,
                     "presentation_rect": [
-                        167.0,
+                        107.0,
                         7.0,
-                        144.0,
+                        94.0,
                         17.0
                     ],
                     "saved_attribute_attributes": {
@@ -500,8 +500,8 @@
                     ],
                     "presentation": 1,
                     "presentation_rect": [
-                        217.0,
-                        30.0,
+                        7.0,
+                        84.0,
                         44.0,
                         52.0
                     ],
@@ -566,8 +566,8 @@
                     ],
                     "presentation": 1,
                     "presentation_rect": [
-                        267.0,
-                        30.0,
+                        57.0,
+                        84.0,
                         44.0,
                         52.0
                     ],
@@ -632,8 +632,8 @@
                     ],
                     "presentation": 1,
                     "presentation_rect": [
-                        7.0,
-                        88.0,
+                        107.0,
+                        84.0,
                         44.0,
                         52.0
                     ],
@@ -696,8 +696,8 @@
                     ],
                     "presentation": 1,
                     "presentation_rect": [
-                        57.0,
-                        88.0,
+                        157.0,
+                        84.0,
                         44.0,
                         52.0
                     ],
@@ -760,8 +760,8 @@
                     ],
                     "presentation": 1,
                     "presentation_rect": [
-                        107.0,
-                        88.0,
+                        207.0,
+                        84.0,
                         44.0,
                         52.0
                     ],
@@ -824,8 +824,8 @@
                     ],
                     "presentation": 1,
                     "presentation_rect": [
-                        267.0,
-                        88.0,
+                        207.0,
+                        28.0,
                         44.0,
                         52.0
                     ],
@@ -844,6 +844,73 @@
                         }
                     },
                     "varname": "Dry/Wet"
+                }
+            },
+            {
+                "box": {
+                    "comment": "On/Off (Int) 1 on, 0 off: off = echoes fade out, dry at full level. Sets the button. Default 1",
+                    "id": "obj-in15",
+                    "index": 14,
+                    "maxclass": "inlet",
+                    "numinlets": 0,
+                    "numoutlets": 1,
+                    "outlettype": [
+                        ""
+                    ],
+                    "patching_rect": [
+                        1065.0,
+                        15.0,
+                        30.0,
+                        30.0
+                    ]
+                }
+            },
+            {
+                "box": {
+                    "id": "obj-onoff",
+                    "maxclass": "live.text",
+                    "numinlets": 1,
+                    "numoutlets": 2,
+                    "outlettype": [
+                        "",
+                        ""
+                    ],
+                    "parameter_enable": 1,
+                    "patching_rect": [
+                        1065.0,
+                        85.0,
+                        44.0,
+                        20.0
+                    ],
+                    "presentation": 1,
+                    "presentation_rect": [
+                        207.0,
+                        5.0,
+                        44.0,
+                        20.0
+                    ],
+                    "text": "Off",
+                    "texton": "On",
+                    "varname": "On/Off",
+                    "annotation_name": "On/Off",
+                    "annotation": "Off: the echoes fade out and the dry signal passes at full level. The delay keeps running underneath, so turning it back on never plays old echoes. Default on",
+                    "saved_attribute_attributes": {
+                        "valueof": {
+                            "parameter_enum": [
+                                "off",
+                                "on"
+                            ],
+                            "parameter_initial": [
+                                1
+                            ],
+                            "parameter_initial_enable": 1,
+                            "parameter_longname": "On/Off",
+                            "parameter_mmax": 1,
+                            "parameter_modmode": 0,
+                            "parameter_shortname": "On/Off",
+                            "parameter_type": 2
+                        }
+                    }
                 }
             },
             {
@@ -951,7 +1018,7 @@
                     "fontsize": 12.0,
                     "id": "obj-core",
                     "maxclass": "newobj",
-                    "numinlets": 14,
+                    "numinlets": 15,
                     "numoutlets": 2,
                     "outlettype": [
                         "signal",
@@ -960,10 +1027,10 @@
                     "patching_rect": [
                         15.0,
                         280.0,
-                        1000.0,
+                        1080.0,
                         22.0
                     ],
-                    "text": "br.delay.tape.1.0"
+                    "text": "br.delay.tape.1.1"
                 }
             },
             {
@@ -1008,12 +1075,12 @@
                     "numinlets": 1,
                     "numoutlets": 0,
                     "patching_rect": [
-                        1080.0,
+                        1155.0,
                         15.0,
                         440.0,
                         33.0
                     ],
-                    "text": "br.delay.tape.ui.1.0 -- Created by Brian Riordan, guaguanco127@gmail.com\nhttps://github.com/guaguanco127/"
+                    "text": "br.delay.tape.ui.1.1 -- Created by Brian Riordan, guaguanco127@gmail.com\nhttps://github.com/guaguanco127/"
                 }
             },
             {
@@ -1026,12 +1093,12 @@
                     "numinlets": 1,
                     "numoutlets": 0,
                     "patching_rect": [
-                        1080.0,
+                        1155.0,
                         60.0,
                         420.0,
                         60.0
                     ],
-                    "text": "Each inlet feeds its control, and each control feeds the core, so the screen always shows what you hear. Starting values are the controls' Initial Values: Linked, 375 / 750 ms, Glide 150, Feedback 0.4 Straight, Low Cut 80, High Cut 8000, Drive 0, Wow and Flutter 0.2, Dry/Wet 50."
+                    "text": "Each inlet feeds its control, and each control feeds the core, so the screen always shows what you hear. Starting values are the controls' Initial Values: Linked, 375 / 750 ms, Glide 150, Feedback 0.4 Straight, Low Cut 80, High Cut 8000, Drive 0, Wow and Flutter 0.2, Dry/Wet 50, On."
                 }
             },
             {
@@ -1044,12 +1111,12 @@
                     "numinlets": 1,
                     "numoutlets": 0,
                     "patching_rect": [
-                        1080.0,
+                        1155.0,
                         145.0,
                         420.0,
                         47.0
                     ],
-                    "text": "[br.delay.tape.1.0] is the real object: open it to see the gen~ inside. This file only adds the controls, so you can also patch the core directly and drive any control with a signal (an LFO on Time = tape warble)."
+                    "text": "[br.delay.tape.1.1] is the real object: open it to see the gen~ inside. This file only adds the controls, so you can also patch the core directly and drive any control with a signal (an LFO on Time = tape warble)."
                 }
             },
             {
@@ -1062,12 +1129,12 @@
                     "numinlets": 1,
                     "numoutlets": 0,
                     "patching_rect": [
-                        1080.0,
+                        1155.0,
                         215.0,
                         420.0,
                         87.0
                     ],
-                    "text": "Why it sounds like tape: changing the time moves the read head instead of jumping, so the pitch bends while it travels, easing in and out like tape speeding up or slowing down. Each side has a first-echo tape and a loop tape; the modes only move the heads, so a mode change glides like a time change and never clicks. Low Cut and High Cut sit at the playback head: every echo goes through them and the loop is fed from the filtered signal, so each repeat is a little darker than the last. Each pass round the loop also gets a gentle tape saturation."
+                    "text": "Why it sounds like tape: changing the time moves the read head instead of jumping, so the pitch bends while it travels, easing in and out like tape speeding up or slowing down. Each side has a first-echo tape and a loop tape; the modes only move the heads, so a mode change glides like a time change and never clicks. Low Cut and High Cut sit at the playback head: every echo goes through them and the loop is fed from the filtered signal, so each repeat is a little darker than the last. Each pass round the loop also gets a gentle tape saturation. Off fades to the dry signal at full level; the delay keeps running underneath."
                 }
             },
             {
@@ -1080,7 +1147,7 @@
                     "numinlets": 1,
                     "numoutlets": 0,
                     "patching_rect": [
-                        1080.0,
+                        1155.0,
                         325.0,
                         420.0,
                         47.0
@@ -1091,7 +1158,7 @@
             {
                 "box": {
                     "angle": 270.0,
-                    "annotation": "br.delay.tape.ui.1.0 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
+                    "annotation": "br.delay.tape.ui.1.1 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
                     "background": 1,
                     "bgcolor": [
                         0.0,
@@ -1099,14 +1166,14 @@
                         0.0,
                         1.0
                     ],
-                    "hint": "br.delay.tape.ui.1.0 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
+                    "hint": "br.delay.tape.ui.1.1 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
                     "id": "obj-panel",
                     "maxclass": "panel",
                     "mode": 0,
                     "numinlets": 1,
                     "numoutlets": 0,
                     "patching_rect": [
-                        1080.0,
+                        1155.0,
                         400.0,
                         160.0,
                         74.0
@@ -1115,7 +1182,7 @@
                     "presentation_rect": [
                         0.0,
                         0.0,
-                        318.0,
+                        258.0,
                         146.0
                     ],
                     "proportion": 0.5,
@@ -1529,6 +1596,30 @@
                     "source": [
                         "obj-wow",
                         0
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-in15",
+                        0
+                    ],
+                    "destination": [
+                        "obj-onoff",
+                        0
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-onoff",
+                        0
+                    ],
+                    "destination": [
+                        "obj-core",
+                        14
                     ]
                 }
             }

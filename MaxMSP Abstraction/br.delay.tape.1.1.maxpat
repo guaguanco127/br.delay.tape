@@ -15,7 +15,7 @@
             1420.0,
             330.0
         ],
-        "description": "br.delay.tape.1.0 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
+        "description": "br.delay.tape.1.1 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
         "boxes": [
             {
                 "box": {
@@ -285,11 +285,30 @@
             },
             {
                 "box": {
+                    "comment": "On/Off (Signal/Int) 1 on, 0 off. Off: the echoes fade out and the dry signal passes at full level. The delay keeps running underneath, so turning it back on never plays old echoes. Fades over 20 ms. Default 1",
+                    "id": "obj-on",
+                    "index": 14,
+                    "maxclass": "inlet",
+                    "numinlets": 0,
+                    "numoutlets": 1,
+                    "outlettype": [
+                        ""
+                    ],
+                    "patching_rect": [
+                        1065.0,
+                        15.0,
+                        30.0,
+                        30.0
+                    ]
+                }
+            },
+            {
+                "box": {
                     "fontname": "Arial",
                     "fontsize": 12.0,
                     "id": "obj-15",
                     "maxclass": "newobj",
-                    "numinlets": 14,
+                    "numinlets": 15,
                     "numoutlets": 2,
                     "outlettype": [
                         "signal",
@@ -606,13 +625,34 @@
                             },
                             {
                                 "box": {
-                                    "code": "// br.delay.tape.1.0 -- stereo tape-style delay\n// Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/\n// MUST MATCH: the core, the UI by reference and the M4L device embed this same code\n// in1/in2 audio L/R\n// in3 mode 0 Linked, 1 Stereo, 2 Ping-Pong\n// in4 time L ms 1..10000 and in5 time R ms 1..10000\n// in6 glide ms 10..1000: how long a time change takes to settle, which sets the pitch bend\n// in7 feedback 0..1.5: above 1 the repeats build up until the saturation holds them\n// in8 feedback route 0 Straight: each side feeds itself, 1 Cross: each side feeds the other\n// in9 low cut Hz 20..2000 and in10 high cut Hz 200..20000: tone of the repeats\n// in11 drive % 0..100: how hard the input hits the tape, 0 = clean\n// in12 wow 0..1 and in13 flutter 0..1: tape speed wobble, slow and fast\n// in14 dry/wet % 0..100\n// out1/out2 audio L/R\n//\n// Why it sounds like tape: changing the time moves the read head instead of jumping, so the\n// pitch bends while it travels, like tape speeding up or slowing down. Each head follows its\n// new time through two smoothers in a row, so the bend eases in and out instead of starting\n// and stopping abruptly. Wow and flutter wobble the heads the way an uneven tape transport does.\n// The tone filters sit at the playback head: every echo you hear goes through them, and the loop\n// is fed from the filtered signal, so each repeat is a little darker and thinner than the one before.\n// Each pass round the loop also goes through a gentle saturation, so the repeats get rounder too.\n// Drive saturates the input on its way onto the tape.\n//\n// Each side has two tapes. The FIRST tape holds the input and is read at the side's own time:\n// that is the first echo. The LOOP tape holds the feedback and is read at the loop time: those\n// are all the later echoes. The modes only change where the heads go:\n//   Linked     both sides use Time L; loop time = the same, so echoes at t, 2t, 3t\n//   Stereo     each side uses its own time, loop time = its own time\n//   Ping-Pong  each side's first echo at its own time, then both repeat every T = the longer time,\n//              so L 250 / R 500 gives L 250, R 500, L 750, R 1000: alternating every 250 ms\n// Feedback Cross sends each side's repeats to the other side's loop tape. Stereo + Cross is the classic\n// ping-pong: each bounce takes the time of the side it lands on. Linked + Cross swaps a stereo image\n// on every repeat. Cross glides over 20 ms: repeats already on the tape keep playing, only where\n// they go next fades across.\n// Nothing is switched in or out: a mode change moves heads through the same eased glide as a\n// time change, so the sound never jumps and the tails carry on through the change.\n\n// 10.1 s at 192 kHz: 10000 ms plus wow room at any sample rate\nDelay firstL(1939200);\nDelay firstR(1939200);\nDelay loopL(1939200);\nDelay loopR(1939200);\nHistory started(0);\nHistory fL1(0);\nHistory fL2(0);\nHistory fR1(0);\nHistory fR2(0);\nHistory lL1(0);\nHistory lL2(0);\nHistory lR1(0);\nHistory lR2(0);\nHistory fbS(0);\nHistory lowS(80);\nHistory highS(8000);\nHistory driveS(0);\nHistory wowS(0);\nHistory flutS(0);\nHistory mixS(50);\nHistory crossS(0);\nHistory wowPh(0);\nHistory wowRate(0.6);\nHistory flutPh(0);\nHistory flutRate(6.5);\nHistory lowL(0);\nHistory lowR(0);\nHistory highL(0);\nHistory highR(0);\n\n// read all state first\nst = started;\na1 = fL1;\na2 = fL2;\nb1 = fR1;\nb2 = fR2;\np1 = lL1;\np2 = lL2;\nq1 = lR1;\nq2 = lR2;\nfb = fbS;\nlo = lowS;\nhi = highS;\ndr = driveS;\nwo = wowS;\nfl = flutS;\nmx = mixS;\ncr = crossS;\nwp = wowPh;\nwr = wowRate;\nfp = flutPh;\nfr = flutRate;\nlzL = lowL;\nlzR = lowR;\nhzL = highL;\nhzR = highR;\n\n// controls glide over 20 ms so nothing clicks\nk = 1 - exp(-1 / mstosamps(20));\nfb = fb + (clip(in7, 0, 1.5) - fb) * k;\nlo = lo + (clip(in9, 20, 2000) - lo) * k;\nhi = hi + (clip(in10, 200, 20000) - hi) * k;\ndr = dr + (clip(in11, 0, 100) - dr) * k;\nwo = wo + (clip(in12, 0, 1) - wo) * k;\nfl = fl + (clip(in13, 0, 1) - fl) * k;\nmx = mx + (clip(in14, 0, 100) - mx) * k;\ncr = cr + (clip(floor(in8 + 0.5), 0, 1) - cr) * k;\n\n// HEAD TARGETS for the mode\nmode = clip(floor(in3 + 0.5), 0, 2);\ntL = mstosamps(clip(in4, 1, 10000));\ntR = mstosamps(clip(in5, 1, 10000));\nfirstTL = tL;\nfirstTR = (mode == 0) ? tL : tR;\nloopTL = firstTL;\nloopTR = firstTR;\nif (mode == 2) {\n    loopTL = max(tL, tR);\n    loopTR = loopTL;\n}\n\n// HEADS: each one chases its target through two one-pole smoothers, c = exp(-1/tau),\n// in the form y = target + c * the distance from target. At load every head starts on its target, no bend\nif (st == 0) {\n    a1 = firstTL;\n    a2 = firstTL;\n    b1 = firstTR;\n    b2 = firstTR;\n    p1 = loopTL;\n    p2 = loopTL;\n    q1 = loopTR;\n    q2 = loopTR;\n    st = 1;\n}\nc = exp(-1 / mstosamps(clip(in6, 10, 1000)));\na1 = firstTL + c * (a1 - firstTL);\na2 = a1 + c * (a2 - a1);\nb1 = firstTR + c * (b1 - firstTR);\nb2 = b1 + c * (b2 - b1);\np1 = loopTL + c * (p1 - loopTL);\np2 = p1 + c * (p2 - p1);\nq1 = loopTR + c * (q1 - loopTR);\nq2 = q1 + c * (q2 - q1);\n\n// WOW and FLUTTER: each is a raised cosine, 0..1, that lengthens the delay, so a head never\n// reads ahead of its set time. Every cycle picks a new random speed when the wave is at 0,\n// so the change is seamless. Depth is set as pitch: full wow = 1 %, full flutter = 0.3 %.\n// Moving a head by A samples in a raised cosine at f Hz bends pitch by pi * f * A / samplerate.\n// One tape transport: all four heads wobble together\nwp = wp + wr / samplerate;\nif (wp >= 1) {\n    wp = wp - 1;\n    wr = 0.4 + 0.5 * abs(noise());\n}\nfp = fp + fr / samplerate;\nif (fp >= 1) {\n    fp = fp - 1;\n    fr = 5 + 3 * abs(noise());\n}\nwowAmt = wo * mstosamps(1000 * 0.01 / (pi * wr));\nflutAmt = fl * mstosamps(1000 * 0.003 / (pi * fr));\nwobble = wowAmt * (1 - cos(twopi * wp)) * 0.5 + flutAmt * (1 - cos(twopi * fp)) * 0.5;\n\n// read every head before writing\ntapL = firstL.read(clip(a2 + wobble, 2, 1939000), interp=\"spline\") + loopL.read(clip(p2 + wobble, 2, 1939000), interp=\"spline\");\ntapR = firstR.read(clip(b2 + wobble, 2, 1939000), interp=\"spline\") + loopR.read(clip(q2 + wobble, 2, 1939000), interp=\"spline\");\n\n// TONE at the playback head: one-pole low cut, the signal minus its own lowpass, then one-pole high cut.\n// Both the output and the loop take the filtered signal, so the tone works even with Feedback at 0\naLo = 1 - exp(-twopi * lo / samplerate);\naHi = 1 - exp(-twopi * min(hi, samplerate * 0.45) / samplerate);\nlzL = lzL + aLo * (tapL - lzL);\nlzR = lzR + aLo * (tapR - lzR);\nhzL = hzL + aHi * ((tapL - lzL) - hzL);\nhzR = hzR + aHi * ((tapR - lzR) - hzR);\n\n// DRIVE: tanh(a * x) / tanh(a) drives the input onto the tape. Peaks stay at the same level,\n// quieter parts come up and get rounder. a = 0.001 is clean; full drive a = 8, about +18 dB on quiet parts\na = 0.001 + dr * 0.08;\nfirstL.write(tanh(a * in1) / tanh(a));\nfirstR.write(tanh(a * in2) / tanh(a));\n\n// The loop's own saturation: plain tanh, unity for quiet repeats, so Feedback above 1 builds up\n// until tanh holds the level instead of running away. Straight: each side feeds its own loop tape,\n// Cross: each side feeds the other's\nsL = tanh(hzL);\nsR = tanh(hzR);\nloopL.write(fb * mix(sL, sR, cr));\nloopR.write(fb * mix(sR, sL, cr));\n\n// write state last\nstarted = st;\nfL1 = a1;\nfL2 = a2;\nfR1 = b1;\nfR2 = b2;\nlL1 = p1;\nlL2 = p2;\nlR1 = q1;\nlR2 = q2;\nfbS = fb;\nlowS = lo;\nhighS = hi;\ndriveS = dr;\nwowS = wo;\nflutS = fl;\nmixS = mx;\ncrossS = cr;\nwowPh = wp;\nwowRate = wr;\nflutPh = fp;\nflutRate = fr;\nlowL = lzL;\nlowR = lzR;\nhighL = hzL;\nhighR = hzR;\n\n// DRY/WET: equal power, so the level stays even across the range\nang = mx * 0.01 * pi * 0.5;\nout1 = in1 * cos(ang) + hzL * sin(ang);\nout2 = in2 * cos(ang) + hzR * sin(ang);\n",
+                                    "fontname": "Arial",
+                                    "fontsize": 12.0,
+                                    "id": "obj-on",
+                                    "linecount": 6,
+                                    "maxclass": "newobj",
+                                    "numinlets": 0,
+                                    "numoutlets": 1,
+                                    "outlettype": [
+                                        ""
+                                    ],
+                                    "patching_rect": [
+                                        827.0,
+                                        13.5,
+                                        100.0,
+                                        89.0
+                                    ],
+                                    "text": "in 15 @comment \"On/Off (Signal/Int) 1 on 0 off -- default 1\" @default 1"
+                                }
+                            },
+                            {
+                                "box": {
+                                    "code": "// br.delay.tape.1.1 -- stereo tape-style delay\n// Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/\n// MUST MATCH: the core, the UI by reference and the M4L device embed this same code\n// in1/in2 audio L/R\n// in3 mode 0 Linked, 1 Stereo, 2 Ping-Pong\n// in4 time L ms 1..10000 and in5 time R ms 1..10000\n// in6 glide ms 10..1000: how long a time change takes to settle, which sets the pitch bend\n// in7 feedback 0..1.5: above 1 the repeats build up until the saturation holds them\n// in8 feedback route 0 Straight: each side feeds itself, 1 Cross: each side feeds the other\n// in9 low cut Hz 20..2000 and in10 high cut Hz 200..20000: tone of the repeats\n// in11 drive % 0..100: how hard the input hits the tape, 0 = clean\n// in12 wow 0..1 and in13 flutter 0..1: tape speed wobble, slow and fast\n// in14 dry/wet % 0..100\n// in15 on/off 1 on, 0 off: off = the dry signal at full level, no echoes\n// out1/out2 audio L/R\n//\n// Why it sounds like tape: changing the time moves the read head instead of jumping, so the\n// pitch bends while it travels, like tape speeding up or slowing down. Each head follows its\n// new time through two smoothers in a row, so the bend eases in and out instead of starting\n// and stopping abruptly. Wow and flutter wobble the heads the way an uneven tape transport does.\n// The tone filters sit at the playback head: every echo you hear goes through them, and the loop\n// is fed from the filtered signal, so each repeat is a little darker and thinner than the one before.\n// Each pass round the loop also goes through a gentle saturation, so the repeats get rounder too.\n// Drive saturates the input on its way onto the tape.\n//\n// Each side has two tapes. The FIRST tape holds the input and is read at the side's own time:\n// that is the first echo. The LOOP tape holds the feedback and is read at the loop time: those\n// are all the later echoes. The modes only change where the heads go:\n//   Linked     both sides use Time L; loop time = the same, so echoes at t, 2t, 3t\n//   Stereo     each side uses its own time, loop time = its own time\n//   Ping-Pong  each side's first echo at its own time, then both repeat every T = the longer time,\n//              so L 250 / R 500 gives L 250, R 500, L 750, R 1000: alternating every 250 ms\n// Feedback Cross sends each side's repeats to the other side's loop tape. Stereo + Cross is the classic\n// ping-pong: each bounce takes the time of the side it lands on. Linked + Cross swaps a stereo image\n// on every repeat. Cross glides over 20 ms: repeats already on the tape keep playing, only where\n// they go next fades across.\n// Nothing is switched in or out: a mode change moves heads through the same eased glide as a\n// time change, so the sound never jumps and the tails carry on through the change.\n//\n// ON/OFF fades over 20 ms. Off: the echoes fade out and the dry signal comes up to full level,\n// whatever the Dry/Wet. The delay keeps running underneath, so turning it back on never plays\n// old echoes from before it was turned off.\n\n// 10.1 s at 192 kHz: 10000 ms plus wow room at any sample rate\nDelay firstL(1939200);\nDelay firstR(1939200);\nDelay loopL(1939200);\nDelay loopR(1939200);\nHistory started(0);\nHistory fL1(0);\nHistory fL2(0);\nHistory fR1(0);\nHistory fR2(0);\nHistory lL1(0);\nHistory lL2(0);\nHistory lR1(0);\nHistory lR2(0);\nHistory fbS(0);\nHistory lowS(80);\nHistory highS(8000);\nHistory driveS(0);\nHistory wowS(0);\nHistory flutS(0);\nHistory mixS(50);\nHistory crossS(0);\nHistory onS(1);\nHistory wowPh(0);\nHistory wowRate(0.6);\nHistory flutPh(0);\nHistory flutRate(6.5);\nHistory lowL(0);\nHistory lowR(0);\nHistory highL(0);\nHistory highR(0);\n\n// read all state first\nst = started;\na1 = fL1;\na2 = fL2;\nb1 = fR1;\nb2 = fR2;\np1 = lL1;\np2 = lL2;\nq1 = lR1;\nq2 = lR2;\nfb = fbS;\nlo = lowS;\nhi = highS;\ndr = driveS;\nwo = wowS;\nfl = flutS;\nmx = mixS;\ncr = crossS;\nen = onS;\nwp = wowPh;\nwr = wowRate;\nfp = flutPh;\nfr = flutRate;\nlzL = lowL;\nlzR = lowR;\nhzL = highL;\nhzR = highR;\n\n// controls glide over 20 ms so nothing clicks\nk = 1 - exp(-1 / mstosamps(20));\nfb = fb + (clip(in7, 0, 1.5) - fb) * k;\nlo = lo + (clip(in9, 20, 2000) - lo) * k;\nhi = hi + (clip(in10, 200, 20000) - hi) * k;\ndr = dr + (clip(in11, 0, 100) - dr) * k;\nwo = wo + (clip(in12, 0, 1) - wo) * k;\nfl = fl + (clip(in13, 0, 1) - fl) * k;\nmx = mx + (clip(in14, 0, 100) - mx) * k;\ncr = cr + (clip(floor(in8 + 0.5), 0, 1) - cr) * k;\nen = en + (clip(floor(in15 + 0.5), 0, 1) - en) * k;\n\n// HEAD TARGETS for the mode\nmode = clip(floor(in3 + 0.5), 0, 2);\ntL = mstosamps(clip(in4, 1, 10000));\ntR = mstosamps(clip(in5, 1, 10000));\nfirstTL = tL;\nfirstTR = (mode == 0) ? tL : tR;\nloopTL = firstTL;\nloopTR = firstTR;\nif (mode == 2) {\n    loopTL = max(tL, tR);\n    loopTR = loopTL;\n}\n\n// HEADS: each one chases its target through two one-pole smoothers, c = exp(-1/tau),\n// in the form y = target + c * the distance from target. At load every head starts on its target, no bend\nif (st == 0) {\n    a1 = firstTL;\n    a2 = firstTL;\n    b1 = firstTR;\n    b2 = firstTR;\n    p1 = loopTL;\n    p2 = loopTL;\n    q1 = loopTR;\n    q2 = loopTR;\n    st = 1;\n}\nc = exp(-1 / mstosamps(clip(in6, 10, 1000)));\na1 = firstTL + c * (a1 - firstTL);\na2 = a1 + c * (a2 - a1);\nb1 = firstTR + c * (b1 - firstTR);\nb2 = b1 + c * (b2 - b1);\np1 = loopTL + c * (p1 - loopTL);\np2 = p1 + c * (p2 - p1);\nq1 = loopTR + c * (q1 - loopTR);\nq2 = q1 + c * (q2 - q1);\n\n// WOW and FLUTTER: each is a raised cosine, 0..1, that lengthens the delay, so a head never\n// reads ahead of its set time. Every cycle picks a new random speed when the wave is at 0,\n// so the change is seamless. Depth is set as pitch: full wow = 1 %, full flutter = 0.3 %.\n// Moving a head by A samples in a raised cosine at f Hz bends pitch by pi * f * A / samplerate.\n// One tape transport: all four heads wobble together\nwp = wp + wr / samplerate;\nif (wp >= 1) {\n    wp = wp - 1;\n    wr = 0.4 + 0.5 * abs(noise());\n}\nfp = fp + fr / samplerate;\nif (fp >= 1) {\n    fp = fp - 1;\n    fr = 5 + 3 * abs(noise());\n}\nwowAmt = wo * mstosamps(1000 * 0.01 / (pi * wr));\nflutAmt = fl * mstosamps(1000 * 0.003 / (pi * fr));\nwobble = wowAmt * (1 - cos(twopi * wp)) * 0.5 + flutAmt * (1 - cos(twopi * fp)) * 0.5;\n\n// read every head before writing\ntapL = firstL.read(clip(a2 + wobble, 2, 1939000), interp=\"spline\") + loopL.read(clip(p2 + wobble, 2, 1939000), interp=\"spline\");\ntapR = firstR.read(clip(b2 + wobble, 2, 1939000), interp=\"spline\") + loopR.read(clip(q2 + wobble, 2, 1939000), interp=\"spline\");\n\n// TONE at the playback head: one-pole low cut, the signal minus its own lowpass, then one-pole high cut.\n// Both the output and the loop take the filtered signal, so the tone works even with Feedback at 0\naLo = 1 - exp(-twopi * lo / samplerate);\naHi = 1 - exp(-twopi * min(hi, samplerate * 0.45) / samplerate);\nlzL = lzL + aLo * (tapL - lzL);\nlzR = lzR + aLo * (tapR - lzR);\nhzL = hzL + aHi * ((tapL - lzL) - hzL);\nhzR = hzR + aHi * ((tapR - lzR) - hzR);\n\n// DRIVE: tanh(a * x) / tanh(a) drives the input onto the tape. Peaks stay at the same level,\n// quieter parts come up and get rounder. a = 0.001 is clean; full drive a = 8, about +18 dB on quiet parts\na = 0.001 + dr * 0.08;\nfirstL.write(tanh(a * in1) / tanh(a));\nfirstR.write(tanh(a * in2) / tanh(a));\n\n// The loop's own saturation: plain tanh, unity for quiet repeats, so Feedback above 1 builds up\n// until tanh holds the level instead of running away. Straight: each side feeds its own loop tape,\n// Cross: each side feeds the other's\nsL = tanh(hzL);\nsR = tanh(hzR);\nloopL.write(fb * mix(sL, sR, cr));\nloopR.write(fb * mix(sR, sL, cr));\n\n// write state last\nstarted = st;\nfL1 = a1;\nfL2 = a2;\nfR1 = b1;\nfR2 = b2;\nlL1 = p1;\nlL2 = p2;\nlR1 = q1;\nlR2 = q2;\nfbS = fb;\nlowS = lo;\nhighS = hi;\ndriveS = dr;\nwowS = wo;\nflutS = fl;\nmixS = mx;\ncrossS = cr;\nonS = en;\nwowPh = wp;\nwowRate = wr;\nflutPh = fp;\nflutRate = fr;\nlowL = lzL;\nlowR = lzR;\nhighL = hzL;\nhighR = hzR;\n\n// DRY/WET: equal power, so the level stays even across the range. Off: dry at full level, no wet\nang = mx * 0.01 * pi * 0.5;\ndry = mix(1, cos(ang), en);\nwet = sin(ang) * en;\nout1 = in1 * dry + hzL * wet;\nout2 = in2 * dry + hzR * wet;\n",
                                     "fontface": 0,
                                     "fontname": "<Monospaced>",
                                     "fontsize": 12.0,
                                     "id": "obj-15",
                                     "maxclass": "codebox",
-                                    "numinlets": 14,
+                                    "numinlets": 15,
                                     "numoutlets": 2,
                                     "outlettype": [
                                         "",
@@ -853,16 +893,28 @@
                                         0
                                     ]
                                 }
+                            },
+                            {
+                                "patchline": {
+                                    "source": [
+                                        "obj-on",
+                                        0
+                                    ],
+                                    "destination": [
+                                        "obj-15",
+                                        14
+                                    ]
+                                }
                             }
                         ]
                     },
                     "patching_rect": [
                         15.0,
                         110.0,
-                        1005.0,
+                        1080.0,
                         22.0
                     ],
-                    "text": "gen~ @title br.delay.tape.1.0"
+                    "text": "gen~ @title br.delay.tape.1.1"
                 }
             },
             {
@@ -907,12 +959,12 @@
                     "numinlets": 1,
                     "numoutlets": 0,
                     "patching_rect": [
-                        1080.0,
+                        1155.0,
                         15.0,
                         399.0,
                         33.0
                     ],
-                    "text": "br.delay.tape.1.0 -- Created by Brian Riordan, guaguanco127@gmail.com\nhttps://github.com/guaguanco127/"
+                    "text": "br.delay.tape.1.1 -- Created by Brian Riordan, guaguanco127@gmail.com\nhttps://github.com/guaguanco127/"
                 }
             },
             {
@@ -925,12 +977,12 @@
                     "numinlets": 1,
                     "numoutlets": 0,
                     "patching_rect": [
-                        1080.0,
+                        1155.0,
                         60.0,
                         320.0,
                         141.0
                     ],
-                    "text": "br.delay.tape: a stereo tape-style delay. Changing the time moves the read head instead of jumping, so the pitch bends while it travels, easing in and out like tape speeding up or slowing down. Wow and flutter wobble the tape speed. The tone filters sit at the playback head, so every echo is filtered and the loop is fed from the filtered signal: each repeat is a little darker than the last. Each pass round the loop also goes through a gentle tape saturation. Drive saturates the input on its way onto the tape. All DSP is in the gen~; every control glides, so nothing clicks. Defaults live in the gen~ (in N @default), so unconnected inlets need nothing."
+                    "text": "br.delay.tape: a stereo tape-style delay. Changing the time moves the read head instead of jumping, so the pitch bends while it travels, easing in and out like tape speeding up or slowing down. Wow and flutter wobble the tape speed. The tone filters sit at the playback head, so every echo is filtered and the loop is fed from the filtered signal: each repeat is a little darker than the last. Each pass round the loop also goes through a gentle tape saturation. Drive saturates the input on its way onto the tape. On/Off fades to the dry signal at full level. All DSP is in the gen~; every control glides, so nothing clicks. Defaults live in the gen~ (in N @default), so unconnected inlets need nothing."
                 }
             }
         ],
@@ -1124,6 +1176,18 @@
                     "source": [
                         "obj-9",
                         0
+                    ]
+                }
+            },
+            {
+                "patchline": {
+                    "source": [
+                        "obj-on",
+                        0
+                    ],
+                    "destination": [
+                        "obj-15",
+                        14
                     ]
                 }
             }

@@ -1,11 +1,11 @@
-# Ableton Max for Live device: br.delay.tape.1.0  
+# Ableton Max for Live device: br.delay.tape.1.1  
    
 By Brian Riordan  
 [guaguanco127@gmail.com](mailto:guaguanco127@gmail.com)  
 [brianriordanmusic@gmail.com](mailto:brianriordanmusic@gmail.com)  
 [https://www.brianriordanmusic.com/](https://www.brianriordanmusic.com/) 
   
-Repository for br.delay.tape.1.0, with all related files, can be found here: [https://github.com/guaguanco127/br.delay.tape](https://github.com/guaguanco127/br.delay.tape)  
+Repository for br.delay.tape.1.1, with all related files, can be found here: [https://github.com/guaguanco127/br.delay.tape](https://github.com/guaguanco127/br.delay.tape)  
 Additional programs can be found here: [https://github.com/guaguanco127/br.max](https://github.com/guaguanco127/br.max)
 
 These files were created with Max 9.
@@ -18,9 +18,9 @@ These files were created with Max 9.
 
 ## <a name="About"></a>About
 
-A stereo tape-style delay. Changing the delay time moves the tape's read head instead of jumping, so the pitch bends while it travels, easing in and out like tape speeding up or slowing down. Three modes (Linked, Stereo, Ping-Pong), straight or cross feedback, tone filters on the echoes, saturation that holds runaway feedback, drive into the tape, and wow and flutter. Every change glides, mode switches included, so nothing clicks. Works at any sample rate.
+A stereo tape-style delay. Changing the delay time moves the tape's read head instead of jumping, so the pitch bends while it travels, easing in and out like tape speeding up or slowing down. Three modes (Linked, Stereo, Ping-Pong), straight or cross feedback, tone filters on the echoes, saturation that holds runaway feedback, drive into the tape, wow and flutter, and On/Off. Every change glides, mode switches included, so nothing clicks. Works at any sample rate.
 
-A stereo audio effect with twelve controls, all Live parameters, so you can automate them or map them to a controller. Two parameter banks: **Delay** (Mode, Time L, Time R, Glide, Feedback, Route, Drive, Dry/Wet) and **Tone + Tape** (Low Cut, High Cut, Wow, Flutter).
+A compact stereo audio effect with thirteen controls, all Live parameters, so you can automate them or map them to a controller. Two parameter banks: **Delay** (Mode, Time L, Time R, Glide, Feedback, Route, Drive, Dry/Wet) and **Tone + Tape** (Low Cut, High Cut, Wow, Flutter, On/Off). The device's On/Off fades and keeps the delay running; Live's own device switch bypasses it completely.
 
 **Mode:**  
 **Linked:** both sides use Time L (Time R is ignored, and greyed out in the UI). Echoes at t, 2t, 3t...  
@@ -44,6 +44,8 @@ Switching modes moves the tape heads through the same glide as a time change: th
 
 **Dry/Wet:** 0 to 100 %, equal power. Default 50.  
 
+**On/Off:** Off fades the echoes out and brings the dry signal up to full level, whatever the Dry/Wet. The delay keeps running underneath, so turning it back on never plays old echoes from before it was turned off. Default on.  
+
 ## <a name="M4L"></a>What Is a Max For Live Device?
 
 Max For Live brings the power and flexibility of Max to Ableton Live. Max For Live gives you access to hundreds of exclusive custom plug-ins (Live Devices) as well as the tools to build your own. These can be MIDI and audio effects, audio and video synthesizers, 3D Jitter visuals, as well as tools that interact with the Live application itself, via the Live API.
@@ -55,7 +57,7 @@ Max For Live brings the power and flexibility of Max to Ableton Live. Max For Li
 2. For Mac:  
 Go to your user folder  
 Then Music > Ableton > User Library > Presets > Audio Effects > Max Audio Effect  
-Copy br.delay.tape.1.0.amxd into that folder
+Copy br.delay.tape.1.1.amxd into that folder
 
 3. For Windows: \Users\[username]\Documents\Ableton\User Library\Presets\Audio Effects\Max Audio Effect  
   
