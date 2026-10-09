@@ -1,13 +1,13 @@
 # Max/MSP Patches, Abstractions, Externals, RNBO, VSTs, and Ableton Max for Live 
 
-## br.delay.tape.1.1
+## br.delay.tape.1.2
    
 By Brian Riordan  
 [guaguanco127@gmail.com](mailto:guaguanco127@gmail.com)  
 [brianriordanmusic@gmail.com](mailto:brianriordanmusic@gmail.com)  
 [https://www.brianriordanmusic.com/](https://www.brianriordanmusic.com/) 
   
-Repository for br.delay.tape.1.1, with all related files, can be found here: [https://github.com/guaguanco127/br.delay.tape](https://github.com/guaguanco127/br.delay.tape)  
+Repository for br.delay.tape.1.2, with all related files, can be found here: [https://github.com/guaguanco127/br.delay.tape](https://github.com/guaguanco127/br.delay.tape)  
 Additional programs can be found here: [https://github.com/guaguanco127/br.max](https://github.com/guaguanco127/br.max)
 
 These files were created with Max 9, or RNBO.
@@ -49,6 +49,11 @@ Switching modes moves the tape heads through the same glide as a time change: th
 
 **On/Off:** Off fades the echoes out and brings the dry signal up to full level, whatever the Dry/Wet. The delay keeps running underneath, so turning it back on never plays old echoes from before it was turned off. Default on.  
 
+## <a name="New12"></a>What's new in 1.2
+
+- New [State outlet](#State) on the UI version (the one with controls): its last outlet sends the settings as named messages the moment they change, so moving a control, numbers into the inlets and preset recalls all show up. Use it to keep a display, Mira or another patch in sync.
+- The plain version, the RNBO patch and the Max for Live device have no State outlet: whatever drives them already knows the values, and in Live or a DAW the controls are normal automatable parameters. Their outlets are unchanged.
+
 ## <a name="How"></a>How it works
 
 Each side has two tapes. The first holds the input and is read at that side's own time: the first echo. The second holds the feedback and is read at the loop time: every later echo. The modes only change where the heads go, which is why a mode change glides instead of clicking. The 10-second tapes use about 8 MB per instance at 48 kHz (they are sized for 192 kHz, so allocation is fixed at about 62 MB).
@@ -57,11 +62,11 @@ Each side has two tapes. The first holds the input and is read at that side's ow
 
 | File | What it is |
 |---|---|
-| br.delay.tape.1.1 | No UI. The plain object to patch with |
-| br.delay.tape.ui.1.1 | With Mode and Route menus and a dial for every control and an On/Off button, ready for a [bpatcher] (258 x 146) |
-| _br.delay.tape.example.1.1 | Example patch: open this first. Pick a source (drum loop, voice, synth plucks, a stereo pair or your mic) |
+| br.delay.tape.1.2 | No UI. The plain object to patch with |
+| br.delay.tape.ui.1.2 | With Mode and Route menus and a dial for every control and an On/Off button, ready for a [bpatcher] (258 x 146) |
+| _br.delay.tape.example.1.2 | Example patch: open this first. Pick a source (drum loop, voice, synth plucks, a stereo pair or your mic) |
 
-The UI version contains the plain version and has the same inlets and outlets, so either swaps in without rewiring. Open the UI version in patching mode for comments on how it is built.
+The UI version contains the plain version and has the same inlets and audio outlets (plus State last), so either swaps in without rewiring. Open the UI version in patching mode for comments on how it is built.
 
 ## <a name="Use"></a>How To Use
 
@@ -83,6 +88,29 @@ The UI version contains the plain version and has the same inlets and outlets, s
 | 14 | Dry/Wet | Signal or Float (UI: Float only) | % 0 to 100 | 50 |
 | 15 | On/Off | Signal or Int (UI: Int only) | 0 off, 1 on | 1 |
 
-Outlets 1 / 2: Left Out / Right Out (Signal)
+Outlets 1 / 2: Left Out / Right Out (Signal)  
+Outlet 3 (UI version only): State (Message), see [State outlet](#State)
 
 Every control glides, so you can change anything while audio plays, and every control also takes a signal: an LFO on Time L gives a continuous tape warble (the example patch does this). In the UI version a number into an inlet moves its control, so the screen always shows what you hear. Hover any inlet or outlet in Max for its description.
+
+## <a name="State"></a>State outlet
+
+The last outlet of the UI version (State) sends the current settings as named messages the moment they change, for example `mode 1`, `timel 375.`, `feedback 0.4`. Use it to keep a display, Mira or another patch in sync. Pick them out by name with [route mode timel timer glide feedback fbroute lowcut highcut drive wow flutter drywet on], not by position, so your patch keeps working if a later version adds controls. Repeats are filtered out.
+
+| Message | Type | Range |
+|---|---|---|
+| mode | Int | menu index: 0 = Linked, 1 = Stereo, 2 = Ping-Pong |
+| timel | Float | ms, 1 to 10000 |
+| timer | Float | ms, 1 to 10000 |
+| glide | Float | ms, 10 to 1000 |
+| feedback | Float | 0 to 1.5 |
+| fbroute | Int | menu index: 0 = Straight, 1 = Cross |
+| lowcut | Float | Hz, 20 to 2000 |
+| highcut | Float | Hz, 200 to 20000 |
+| drive | Float | %, 0 to 100 |
+| wow | Float | 0 to 1 |
+| flutter | Float | 0 to 1 |
+| drywet | Float | %, 0 to 100 |
+| on | Int | 0 = off, 1 = on |
+
+The plain version has no State outlet: whatever drives it already knows the values. Mode and Route are sent as the menu index, the same number their inlets take, so a State message can go straight back into an inlet. The example patch has a State outlet tab that shows this.
