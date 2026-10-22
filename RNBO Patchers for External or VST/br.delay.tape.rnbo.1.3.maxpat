@@ -512,7 +512,7 @@
                                                 134.0,
                                                 87.0,
                                                 1300.0,
-                                                884.0
+                                                900.0
                                             ],
                                             "boxes": [
                                                 {
@@ -527,9 +527,9 @@
                                                             ""
                                                         ],
                                                         "patching_rect": [
-                                                            29.0,
                                                             20.0,
-                                                            183.0,
+                                                            20.0,
+                                                            227.0,
                                                             22.0
                                                         ],
                                                         "text": "in 1 @comment \"Left In (Signal)\""
@@ -547,9 +547,9 @@
                                                             ""
                                                         ],
                                                         "patching_rect": [
-                                                            90.0,
-                                                            47.0,
-                                                            191.0,
+                                                            262.0,
+                                                            20.0,
+                                                            234.0,
                                                             22.0
                                                         ],
                                                         "text": "in 2 @comment \"Right In (Signal)\""
@@ -560,7 +560,7 @@
                                                         "fontname": "Arial",
                                                         "fontsize": 12.0,
                                                         "id": "obj-3",
-                                                        "linecount": 6,
+                                                        "linecount": 4,
                                                         "maxclass": "newobj",
                                                         "numinlets": 0,
                                                         "numoutlets": 1,
@@ -568,10 +568,10 @@
                                                             ""
                                                         ],
                                                         "patching_rect": [
-                                                            154.0,
-                                                            89.0,
-                                                            100.0,
-                                                            89.0
+                                                            511.0,
+                                                            20.0,
+                                                            200.0,
+                                                            62.0
                                                         ],
                                                         "text": "in 3 @comment \"Mode (Signal/Int) 0 Linked 1 Stereo 2 Ping-Pong -- default 0\""
                                                     }
@@ -581,7 +581,7 @@
                                                         "fontname": "Arial",
                                                         "fontsize": 12.0,
                                                         "id": "obj-4",
-                                                        "linecount": 6,
+                                                        "linecount": 4,
                                                         "maxclass": "newobj",
                                                         "numinlets": 0,
                                                         "numoutlets": 1,
@@ -589,10 +589,10 @@
                                                             ""
                                                         ],
                                                         "patching_rect": [
-                                                            213.0,
-                                                            187.0,
-                                                            100.0,
-                                                            89.0
+                                                            726.0,
+                                                            20.0,
+                                                            200.0,
+                                                            62.0
                                                         ],
                                                         "text": "in 4 @comment \"Time L (Signal/Float) ms 1 to 10000 -- default 375\" @default 375"
                                                     }
@@ -602,7 +602,7 @@
                                                         "fontname": "Arial",
                                                         "fontsize": 12.0,
                                                         "id": "obj-5",
-                                                        "linecount": 6,
+                                                        "linecount": 4,
                                                         "maxclass": "newobj",
                                                         "numinlets": 0,
                                                         "numoutlets": 1,
@@ -610,10 +610,10 @@
                                                             ""
                                                         ],
                                                         "patching_rect": [
-                                                            262.0,
-                                                            299.0,
-                                                            100.0,
-                                                            89.0
+                                                            941.0,
+                                                            20.0,
+                                                            200.0,
+                                                            62.0
                                                         ],
                                                         "text": "in 5 @comment \"Time R (Signal/Float) ms 1 to 10000 -- default 750\" @default 750"
                                                     }
@@ -623,7 +623,7 @@
                                                         "fontname": "Arial",
                                                         "fontsize": 12.0,
                                                         "id": "obj-6",
-                                                        "linecount": 6,
+                                                        "linecount": 4,
                                                         "maxclass": "newobj",
                                                         "numinlets": 0,
                                                         "numoutlets": 1,
@@ -631,10 +631,10 @@
                                                             ""
                                                         ],
                                                         "patching_rect": [
-                                                            319.0,
-                                                            399.0,
-                                                            100.0,
-                                                            89.0
+                                                            284.64285714285717,
+                                                            158.0,
+                                                            200.0,
+                                                            62.0
                                                         ],
                                                         "text": "in 6 @comment \"Glide (Signal/Float) ms 10 to 1000 -- default 150\" @default 150"
                                                     }
@@ -644,7 +644,7 @@
                                                         "fontname": "Arial",
                                                         "fontsize": 12.0,
                                                         "id": "obj-7",
-                                                        "linecount": 6,
+                                                        "linecount": 3,
                                                         "maxclass": "newobj",
                                                         "numinlets": 0,
                                                         "numoutlets": 1,
@@ -652,10 +652,10 @@
                                                             ""
                                                         ],
                                                         "patching_rect": [
-                                                            378.0,
-                                                            13.5,
-                                                            100.0,
-                                                            89.0
+                                                            499.64285714285717,
+                                                            158.0,
+                                                            200.0,
+                                                            49.0
                                                         ],
                                                         "text": "in 7 @comment \"Feedback (Signal/Float) 0 to 1.5 -- default 0.4\" @default 0.4"
                                                     }
@@ -665,7 +665,7 @@
                                                         "fontname": "Arial",
                                                         "fontsize": 12.0,
                                                         "id": "obj-8",
-                                                        "linecount": 6,
+                                                        "linecount": 4,
                                                         "maxclass": "newobj",
                                                         "numinlets": 0,
                                                         "numoutlets": 1,
@@ -673,10 +673,10 @@
                                                             ""
                                                         ],
                                                         "patching_rect": [
-                                                            433.0,
-                                                            115.0,
-                                                            100.0,
-                                                            89.0
+                                                            714.6428571428571,
+                                                            158.0,
+                                                            200.0,
+                                                            62.0
                                                         ],
                                                         "text": "in 8 @comment \"Feedback Route (Signal/Int) 0 Straight 1 Cross -- default 0\""
                                                     }
@@ -686,7 +686,7 @@
                                                         "fontname": "Arial",
                                                         "fontsize": 12.0,
                                                         "id": "obj-9",
-                                                        "linecount": 6,
+                                                        "linecount": 4,
                                                         "maxclass": "newobj",
                                                         "numinlets": 0,
                                                         "numoutlets": 1,
@@ -694,10 +694,10 @@
                                                             ""
                                                         ],
                                                         "patching_rect": [
-                                                            485.0,
-                                                            225.0,
-                                                            100.0,
-                                                            89.0
+                                                            929.6428571428571,
+                                                            158.0,
+                                                            200.0,
+                                                            62.0
                                                         ],
                                                         "text": "in 9 @comment \"Low Cut (Signal/Float) Hz 20 to 2000 -- default 80\" @default 80"
                                                     }
@@ -707,7 +707,7 @@
                                                         "fontname": "Arial",
                                                         "fontsize": 12.0,
                                                         "id": "obj-10",
-                                                        "linecount": 6,
+                                                        "linecount": 4,
                                                         "maxclass": "newobj",
                                                         "numinlets": 0,
                                                         "numoutlets": 1,
@@ -715,10 +715,10 @@
                                                             ""
                                                         ],
                                                         "patching_rect": [
-                                                            542.0,
-                                                            392.0,
-                                                            100.0,
-                                                            89.0
+                                                            496.35714285714283,
+                                                            284.0,
+                                                            200.0,
+                                                            62.0
                                                         ],
                                                         "text": "in 10 @comment \"High Cut (Signal/Float) Hz 200 to 20000 -- default 8000\" @default 8000"
                                                     }
@@ -728,7 +728,7 @@
                                                         "fontname": "Arial",
                                                         "fontsize": 12.0,
                                                         "id": "obj-11",
-                                                        "linecount": 5,
+                                                        "linecount": 3,
                                                         "maxclass": "newobj",
                                                         "numinlets": 0,
                                                         "numoutlets": 1,
@@ -736,10 +736,10 @@
                                                             ""
                                                         ],
                                                         "patching_rect": [
-                                                            603.0,
-                                                            13.5,
-                                                            100.0,
-                                                            76.0
+                                                            711.3571428571429,
+                                                            284.0,
+                                                            200.0,
+                                                            49.0
                                                         ],
                                                         "text": "in 11 @comment \"Drive (Signal/Float) % 0 to 100 -- default 0\""
                                                     }
@@ -749,7 +749,7 @@
                                                         "fontname": "Arial",
                                                         "fontsize": 12.0,
                                                         "id": "obj-12",
-                                                        "linecount": 6,
+                                                        "linecount": 3,
                                                         "maxclass": "newobj",
                                                         "numinlets": 0,
                                                         "numoutlets": 1,
@@ -757,10 +757,10 @@
                                                             ""
                                                         ],
                                                         "patching_rect": [
-                                                            656.0,
-                                                            110.0,
-                                                            100.0,
-                                                            89.0
+                                                            926.3571428571429,
+                                                            284.0,
+                                                            200.0,
+                                                            49.0
                                                         ],
                                                         "text": "in 12 @comment \"Wow (Signal/Float) 0 to 1 -- default 0.2\" @default 0.2"
                                                     }
@@ -770,7 +770,7 @@
                                                         "fontname": "Arial",
                                                         "fontsize": 12.0,
                                                         "id": "obj-13",
-                                                        "linecount": 6,
+                                                        "linecount": 3,
                                                         "maxclass": "newobj",
                                                         "numinlets": 0,
                                                         "numoutlets": 1,
@@ -778,10 +778,10 @@
                                                             ""
                                                         ],
                                                         "patching_rect": [
-                                                            713.0,
-                                                            225.0,
-                                                            100.0,
-                                                            89.0
+                                                            655.1428571428571,
+                                                            398.0,
+                                                            200.0,
+                                                            49.0
                                                         ],
                                                         "text": "in 13 @comment \"Flutter (Signal/Float) 0 to 1 -- default 0.2\" @default 0.2"
                                                     }
@@ -791,7 +791,7 @@
                                                         "fontname": "Arial",
                                                         "fontsize": 12.0,
                                                         "id": "obj-14",
-                                                        "linecount": 6,
+                                                        "linecount": 3,
                                                         "maxclass": "newobj",
                                                         "numinlets": 0,
                                                         "numoutlets": 1,
@@ -799,10 +799,10 @@
                                                             ""
                                                         ],
                                                         "patching_rect": [
-                                                            770.0,
-                                                            399.0,
-                                                            100.0,
-                                                            89.0
+                                                            870.1428571428571,
+                                                            398.0,
+                                                            200.0,
+                                                            49.0
                                                         ],
                                                         "text": "in 14 @comment \"Dry/Wet (Signal/Float) % 0 to 100 -- default 50\" @default 50"
                                                     }
@@ -812,7 +812,7 @@
                                                         "fontname": "Arial",
                                                         "fontsize": 12.0,
                                                         "id": "obj-on",
-                                                        "linecount": 6,
+                                                        "linecount": 3,
                                                         "maxclass": "newobj",
                                                         "numinlets": 0,
                                                         "numoutlets": 1,
@@ -820,10 +820,10 @@
                                                             ""
                                                         ],
                                                         "patching_rect": [
-                                                            827.0,
-                                                            13.5,
-                                                            100.0,
-                                                            89.0
+                                                            761.0,
+                                                            487.0,
+                                                            200.0,
+                                                            49.0
                                                         ],
                                                         "text": "in 15 @comment \"On/Off (Signal/Int) 1 on 0 off -- default 1\" @default 1"
                                                     }
@@ -843,8 +843,8 @@
                                                             ""
                                                         ],
                                                         "patching_rect": [
-                                                            29.0,
-                                                            556.0,
+                                                            20.0,
+                                                            561.0,
                                                             760.0,
                                                             910.0
                                                         ]
@@ -859,9 +859,9 @@
                                                         "numinlets": 1,
                                                         "numoutlets": 0,
                                                         "patching_rect": [
-                                                            29.0,
-                                                            1486.0,
-                                                            200.0,
+                                                            20.0,
+                                                            1501.0,
+                                                            240.0,
                                                             22.0
                                                         ],
                                                         "text": "out 1 @comment \"Left Out (Signal)\""
@@ -876,9 +876,9 @@
                                                         "numinlets": 1,
                                                         "numoutlets": 0,
                                                         "patching_rect": [
-                                                            770.0,
-                                                            1481.0,
-                                                            207.0,
+                                                            761.0,
+                                                            1501.0,
+                                                            247.0,
                                                             22.0
                                                         ],
                                                         "text": "out 2 @comment \"Right Out (Signal)\""
@@ -916,6 +916,12 @@
                                                             "obj-15",
                                                             10
                                                         ],
+                                                        "midpoints": [
+                                                            720.8571428571429,
+                                                            361.0,
+                                                            558.7857142857143,
+                                                            361.0
+                                                        ],
                                                         "source": [
                                                             "obj-11",
                                                             0
@@ -927,6 +933,12 @@
                                                         "destination": [
                                                             "obj-15",
                                                             11
+                                                        ],
+                                                        "midpoints": [
+                                                            935.8571428571429,
+                                                            373.0,
+                                                            611.7142857142857,
+                                                            373.0
                                                         ],
                                                         "source": [
                                                             "obj-12",
@@ -951,6 +963,12 @@
                                                         "destination": [
                                                             "obj-15",
                                                             13
+                                                        ],
+                                                        "midpoints": [
+                                                            879.6428571428571,
+                                                            462.0,
+                                                            717.5714285714286,
+                                                            462.0
                                                         ],
                                                         "source": [
                                                             "obj-14",
@@ -988,6 +1006,12 @@
                                                             "obj-15",
                                                             1
                                                         ],
+                                                        "midpoints": [
+                                                            271.5,
+                                                            97.0,
+                                                            82.42857142857143,
+                                                            97.0
+                                                        ],
                                                         "source": [
                                                             "obj-2",
                                                             0
@@ -999,6 +1023,12 @@
                                                         "destination": [
                                                             "obj-15",
                                                             2
+                                                        ],
+                                                        "midpoints": [
+                                                            520.5,
+                                                            109.0,
+                                                            135.35714285714286,
+                                                            109.0
                                                         ],
                                                         "source": [
                                                             "obj-3",
@@ -1012,6 +1042,12 @@
                                                             "obj-15",
                                                             3
                                                         ],
+                                                        "midpoints": [
+                                                            735.5,
+                                                            121.0,
+                                                            188.28571428571428,
+                                                            121.0
+                                                        ],
                                                         "source": [
                                                             "obj-4",
                                                             0
@@ -1023,6 +1059,12 @@
                                                         "destination": [
                                                             "obj-15",
                                                             4
+                                                        ],
+                                                        "midpoints": [
+                                                            950.5,
+                                                            133.0,
+                                                            241.21428571428572,
+                                                            133.0
                                                         ],
                                                         "source": [
                                                             "obj-5",
@@ -1048,6 +1090,12 @@
                                                             "obj-15",
                                                             6
                                                         ],
+                                                        "midpoints": [
+                                                            509.14285714285717,
+                                                            235.0,
+                                                            347.07142857142856,
+                                                            235.0
+                                                        ],
                                                         "source": [
                                                             "obj-7",
                                                             0
@@ -1060,6 +1108,12 @@
                                                             "obj-15",
                                                             7
                                                         ],
+                                                        "midpoints": [
+                                                            724.1428571428571,
+                                                            247.0,
+                                                            400.0,
+                                                            247.0
+                                                        ],
                                                         "source": [
                                                             "obj-8",
                                                             0
@@ -1071,6 +1125,12 @@
                                                         "destination": [
                                                             "obj-15",
                                                             8
+                                                        ],
+                                                        "midpoints": [
+                                                            939.1428571428571,
+                                                            259.0,
+                                                            452.92857142857144,
+                                                            259.0
                                                         ],
                                                         "source": [
                                                             "obj-9",
