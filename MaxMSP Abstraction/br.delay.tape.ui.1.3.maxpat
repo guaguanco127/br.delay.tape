@@ -18,7 +18,7 @@
         "openrectmode": 0,
         "openinpresentation": 1,
         "devicewidth": 258.0,
-        "description": "br.delay.tape.ui.1.2 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
+        "description": "br.delay.tape.ui.1.3 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
         "boxes": [
             {
                 "box": {
@@ -1031,7 +1031,7 @@
                         1080.0,
                         22.0
                     ],
-                    "text": "br.delay.tape.1.2"
+                    "text": "br.delay.tape.1.3"
                 }
             },
             {
@@ -1081,7 +1081,7 @@
                         440.0,
                         33.0
                     ],
-                    "text": "br.delay.tape.ui.1.2 -- Created by Brian Riordan, guaguanco127@gmail.com\nhttps://github.com/guaguanco127/"
+                    "text": "br.delay.tape.ui.1.3 -- Created by Brian Riordan, guaguanco127@gmail.com\nhttps://github.com/guaguanco127/"
                 }
             },
             {
@@ -1117,7 +1117,7 @@
                         420.0,
                         47.0
                     ],
-                    "text": "[br.delay.tape.1.2] is the real object: open it to see the gen~ inside. This file only adds the controls, so you can also patch the core directly and drive any control with a signal (an LFO on Time = tape warble)."
+                    "text": "[br.delay.tape.1.3] is the real object: open it to see the gen~ inside. This file only adds the controls, so you can also patch the core directly and drive any control with a signal (an LFO on Time = tape warble)."
                 }
             },
             {
@@ -1159,7 +1159,7 @@
             {
                 "box": {
                     "angle": 270.0,
-                    "annotation": "br.delay.tape.ui.1.2 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
+                    "annotation": "br.delay.tape.ui.1.3 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
                     "background": 1,
                     "bgcolor": [
                         0.0,
@@ -1167,7 +1167,7 @@
                         0.0,
                         1.0
                     ],
-                    "hint": "br.delay.tape.ui.1.2 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
+                    "hint": "br.delay.tape.ui.1.3 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
                     "id": "obj-panel",
                     "maxclass": "panel",
                     "mode": 0,

@@ -15,7 +15,7 @@
             902.0,
             630.0
         ],
-        "description": "_br.delay.tape.example.1.2 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
+        "description": "_br.delay.tape.example.1.3 -- Created by Brian Riordan, guaguanco127@gmail.com -- https://github.com/guaguanco127/",
         "showontab": 1,
         "boxes": [
             {
@@ -1762,7 +1762,7 @@
                         463.0,
                         33.0
                     ],
-                    "text": "_br.delay.tape.example.1.2 -- Created by Brian Riordan, guaguanco127@gmail.com\nhttps://github.com/guaguanco127/"
+                    "text": "_br.delay.tape.example.1.3 -- Created by Brian Riordan, guaguanco127@gmail.com\nhttps://github.com/guaguanco127/"
                 }
             },
             {
@@ -1815,7 +1815,7 @@
                         778.0,
                         60.0
                     ],
-                    "text": "Two files, same DSP inside:\nbr.delay.tape.1.2 = core, no UI (in: L, R, Mode, Time L, Time R, Glide, Feedback, Route, Low Cut, High Cut, Drive, Wow, Flutter, Dry/Wet, On/Off)\nbr.delay.tape.ui.1.2 = the same with controls, for bpatchers\nUI and core have the same inlets in the same order. The UI adds one last outlet, State."
+                    "text": "Two files, same DSP inside:\nbr.delay.tape.1.3 = core, no UI (in: L, R, Mode, Time L, Time R, Glide, Feedback, Route, Low Cut, High Cut, Drive, Wow, Flutter, Dry/Wet, On/Off)\nbr.delay.tape.ui.1.3 = the same with controls, for bpatchers\nUI and core have the same inlets in the same order. The UI adds one last outlet, State."
                 }
             },
             {
@@ -1919,7 +1919,7 @@
                         145.0,
                         20.0
                     ],
-                    "text": "A: br.delay.tape.ui.1.2"
+                    "text": "A: br.delay.tape.ui.1.3"
                 }
             },
             {
@@ -1933,7 +1933,7 @@
                     "lockeddragscroll": 0,
                     "lockedsize": 0,
                     "maxclass": "bpatcher",
-                    "name": "br.delay.tape.ui.1.2.maxpat",
+                    "name": "br.delay.tape.ui.1.3.maxpat",
                     "numinlets": 15,
                     "numoutlets": 3,
                     "offset": [
@@ -2103,7 +2103,7 @@
                         420.0,
                         22.0
                     ],
-                    "text": "br.delay.tape.1.2"
+                    "text": "br.delay.tape.1.3"
                 }
             },
             {

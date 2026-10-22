@@ -1,13 +1,13 @@
 # Max/MSP Patches, Abstractions, Externals, RNBO, VSTs, and Ableton Max for Live 
 
-## br.delay.tape.1.2
+## br.delay.tape.1.3
    
 By Brian Riordan  
 guaguanco127 [at] gmail [dot] com  
 brianriordanmusic [at] gmail [dot] com  
 [https://www.brianriordanmusic.com/](https://www.brianriordanmusic.com/) 
   
-Repository for br.delay.tape.1.2, with all related files, can be found here: [https://github.com/guaguanco127/br.delay.tape](https://github.com/guaguanco127/br.delay.tape)  
+Repository for br.delay.tape.1.3, with all related files, can be found here: [https://github.com/guaguanco127/br.delay.tape](https://github.com/guaguanco127/br.delay.tape)  
 Additional programs can be found here: [https://github.com/guaguanco127/br.max](https://github.com/guaguanco127/br.max)
 
 These files were created with Max 9, or RNBO.
@@ -15,6 +15,7 @@ These files were created with Max 9, or RNBO.
 ## Links
 
 [About](#About)  
+[What's new in 1.3](#New13)  
 [Max/MSP Abstraction](https://github.com/guaguanco127/br.delay.tape/tree/main/MaxMSP%20Abstraction) To use as an abstraction within Max/MSP   
 [Max/MSP RNBO for External or VST](https://github.com/guaguanco127/br.delay.tape/tree/main/RNBO%20Patchers%20for%20External%20or%20VST) To build your own Max external, or a VST or AU audio plugin (needs RNBO)  
 [Ableton Max for Live Device](https://github.com/guaguanco127/br.delay.tape/tree/main/Ableton%20Max%20For%20Live) To use inside of Ableton Suite   
@@ -49,6 +50,10 @@ Switching modes moves the tape heads through the same glide as a time change: th
 
 **On/Off:** Off fades the echoes out and brings the dry signal up to full level, whatever the Dry/Wet. The delay keeps running underneath, so turning it back on never plays old echoes from before it was turned off. Default on.  
 
+## <a name="New13"></a>What's new in 1.3
+
+- **Readable dials in the Max for Live device:** the dials' values and needles are now white, so they stand out on the black panel (with Live's default theme they were dark and hard to read). The abstraction, RNBO patch and sound are unchanged; every file now has the version 1.3.
+
 ## <a name="New12"></a>What's new in 1.2
 
 - New [State outlet](#State) on the UI version (the one with controls): its last outlet sends the settings as named messages the moment they change, so moving a control, numbers into the inlets and preset recalls all show up. Use it to keep a display, Mira or another patch in sync.
@@ -62,9 +67,9 @@ Each side has two tapes. The first holds the input and is read at that side's ow
 
 | File | What it is |
 |---|---|
-| br.delay.tape.1.2 | No UI. The plain object to patch with |
-| br.delay.tape.ui.1.2 | With Mode and Route menus and a dial for every control and an On/Off button, ready for a [bpatcher] (258 x 146) |
-| _br.delay.tape.example.1.2 | Example patch: open this first. Pick a source (drum loop, voice, synth plucks, a stereo pair or your mic) |
+| br.delay.tape.1.3 | No UI. The plain object to patch with |
+| br.delay.tape.ui.1.3 | With Mode and Route menus and a dial for every control and an On/Off button, ready for a [bpatcher] (258 x 146) |
+| _br.delay.tape.example.1.3 | Example patch: open this first. Pick a source (drum loop, voice, synth plucks, a stereo pair or your mic) |
 
 The UI version contains the plain version and has the same inlets and audio outlets (plus State last), so either swaps in without rewiring. Open the UI version in patching mode for comments on how it is built.
 
